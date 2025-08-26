@@ -21,3 +21,5 @@ const httpConfig=()=>({
 });
 
 export const HTTP_STATUS=httpConfig();
+
+export type HttpStatusCodeType = (typeof HTTP_STATUS )[keyof typeof HTTP_STATUS];
