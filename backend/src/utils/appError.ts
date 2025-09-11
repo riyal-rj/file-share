@@ -1,4 +1,4 @@
-import { ErrorCodeEnum, ErrorCodeEnumType } from "../enum/errorCode.enum";
+ import { ErrorCodeEnum, ErrorCodeEnumType } from "../enum/errorCode.enum";
 import { HTTP_STATUS, HttpStatusCodeType } from "../config/http.config";
 
 export class AppError extends Error {

@@ -19,6 +19,10 @@ const envConfig = () => ({
 
   LOGTAIL_SOURCE_TOKEN: getEnvVars('LOGTAIL_SOURCE_TOKEN'),
   LOGTAIL_INGESTING_HOST: getEnvVars('LOGTAIL_INGESTING_HOST'),
+
+  ALLOWED_ORIGINS:getEnvVars(
+    'ALLOWED_ORIGINS',
+  )
   
 });
 
