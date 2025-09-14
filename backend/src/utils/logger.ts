@@ -24,10 +24,10 @@ if (ENV_VARS.NODE_ENV !== "production") {
         colorize({
           all: true,
           colors: {
-            info: "green",
+            info: "blue",
             error: "red",
             warn: "yellow",
-            debug: "blue",
+            debug: "green",
             verbose: "gray",
             http: "magenta",
           },
