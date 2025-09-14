@@ -7,6 +7,7 @@ import helmet from "helmet";
 import { ENV_VARS } from "./config/env.config";
 import { UnauthorizedException } from "./utils/appError";
 import { errorHandler } from "./middleware/errorHandler.middleware";
+import { logger } from "./utils/logger";
 
 const app=express();
 const BASE_PATH=ENV_VARS.BASE_PATH;
@@ -43,27 +44,27 @@ async function startServer(){
         //await connectDatabase();  
      
         const server = app.listen(ENV_VARS.PORT, ()=>{
-            console.log(`Server is running on port ${ENV_VARS.PORT} in ${ENV_VARS.NODE_ENV} mode`);
+            logger.info(`Server is running on port ${ENV_VARS.PORT} in ${ENV_VARS.NODE_ENV} mode`);
         });
 
         const shutDownSignals=["SIGTERM","SIGINT"];
         shutDownSignals.forEach((signal)=>{
             process.on(signal,async ()=>{
-                console.log(`${signal} received: shutting down gracefully`);
+                logger.warn(`${signal} received: shutting down gracefully`);
             });
             try {
                 server.close(()=>{
-                    console.log(`HTTP server closed`);
+                    logger.warn(`HTTP server closed`);
                 });
 
                 process.exit(0);
             } catch (error) {
-                console.error(`Error ocurred while shutting down the server: ${error}`);
+                logger.error(`Error ocurred while shutting down the server: ${error}`);
                 process.exit(1);
             }
         });
     } catch (error) {
-        console.error(`Failed to start the server`, error);
+        logger.error(`Failed to start the server`, error);
         process.exit(1);
     }
 }
