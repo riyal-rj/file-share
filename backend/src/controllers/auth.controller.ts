@@ -3,7 +3,6 @@ import { asyncHandler } from "../middleware/asyncHandler.middleware";
 import { loginSchema, registerSchema } from "../validators/auth.validators";
 import { HTTP_STATUS } from "../config/http.config";
 import { loginService, registerService } from "../services/auth.service";
-
 export const registerController = asyncHandler(
   async (req: Request, res: Response) => {
     const body = registerSchema.parse(req.body);

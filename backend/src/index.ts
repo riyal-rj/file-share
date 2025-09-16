@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import express, { NextFunction, Request, Response } from "express";
+import express from "express";
 import cors, { CorsOptions } from "cors";
 import helmet from "helmet";
+import morgan from "morgan";
 import { ENV_VARS } from "./config/env.config";
 import { UnauthorizedException } from "./utils/appError";
 import { errorHandler } from "./middleware/errorHandler.middleware";
@@ -36,6 +37,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(helmet());
 
+if (ENV_VARS.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 app.use(passport.initialize());
 
 app.use(BASE_PATH,privateRoutes);
