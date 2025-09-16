@@ -10,8 +10,8 @@ export const STORAGE_QUOTA = 2 * 1024 * 1024 * 1024;
 export const storageSchema = new Schema<StorageInterface, StorageModelType>(
   {
     userId: {
-      types: Schema.Types.ObjectId,
-      ref: "User",
+      type: Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     storageQuota: {

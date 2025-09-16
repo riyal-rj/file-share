@@ -1,10 +1,11 @@
 import mongoose,{Model, Schema, Types} from "mongoose";
 import { FileInterface, FileModelType } from "../schemas/file.schemas";
 import { formatBytes } from "../utils/formatBytes";
+import { UploadSourceEnum } from "../enum/uploadSource.enum";
 
 const fileSchema = new Schema<FileInterface, FileModelType>({
     userId:{
-        types:Schema.Types.ObjectId,
+        type:Schema.Types.ObjectId,
         ref:'User',
         required:true,
     },
@@ -24,6 +25,7 @@ const fileSchema = new Schema<FileInterface, FileModelType>({
     size:{
         type:Number,
         required:true,
+        min:1
     },
     ext:{
         type:String,
@@ -35,6 +37,7 @@ const fileSchema = new Schema<FileInterface, FileModelType>({
     },
     uploadVia:{
         type:String,
+        enum: Object.keys(UploadSourceEnum),
         required:true,
     },
 },{

@@ -16,7 +16,7 @@ const envConfig = () => {
     NODE_ENV: getEnvVars("NODE_ENV", "development"),
     PORT: getEnvVars("PORT", "3000"),
 
-    BASE_PATH: getEnvVars("BASE_PATH", "/api"),
+    BASE_PATH: getEnvVars("BASE_PATH", "/api/v1"),
     MONGO_URI: mongoUri,
 
     JWT_SECRET: getEnvVars("JWT_SECRET", "secret_jwt"),

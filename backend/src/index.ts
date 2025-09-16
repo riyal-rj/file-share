@@ -9,6 +9,8 @@ import { UnauthorizedException } from "./utils/appError";
 import { errorHandler } from "./middleware/errorHandler.middleware";
 import { logger } from "./utils/logger";
 import { connectDatabase, disconnectDatabase } from "./config/database.config";
+import privateRoutes from "./routes/private";
+import passport from "passport";
 
 const app = express();
 const BASE_PATH = ENV_VARS.BASE_PATH;
@@ -33,6 +35,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(helmet());
+
+app.use(passport.initialize());
+
+app.use(BASE_PATH,privateRoutes);
 
 app.use(errorHandler);
 
