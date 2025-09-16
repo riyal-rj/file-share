@@ -1,7 +1,6 @@
 import mongoose,{Model, Schema, Types} from "mongoose";
 import { FileInterface, FileModelType } from "../schemas/file.schemas";
 import { formatBytes } from "../utils/formatBytes";
-import { userInfo } from "os";
 
 const fileSchema = new Schema<FileInterface, FileModelType>({
     userId:{
