@@ -59,7 +59,7 @@ export const uploadFileService = async (
   );
 };
 
-export const gerAllFileService = async (
+export const getAllFileService = async (
   userId: string,
   filter: {
     keyword?: string;
