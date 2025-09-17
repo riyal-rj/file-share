@@ -60,7 +60,7 @@ export const deleteFilesController = asyncHandler(
   async (req: Request, res: Response) => {
     const userId = req.user?._id;
     const { fileIds } = deleteFileSchema.parse(req.body);
-
+    console.log(fileIds);
     const result = await deleteFileService(userId, fileIds);
 
     return res.status(HTTP_STATUS.OK).json({

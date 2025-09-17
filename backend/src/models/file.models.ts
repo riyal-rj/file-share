@@ -33,7 +33,6 @@ const fileSchema = new Schema<FileInterface, FileModelType>({
     },
     url:{
         type:String,
-        required:true,
     },
     uploadVia:{
         type:String,

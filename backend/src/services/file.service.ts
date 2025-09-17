@@ -1,7 +1,7 @@
 import { UploadSourceEnum } from "../enum/uploadSource.enum";
 import FileModel from "../models/file.models";
 import UserModel from "../models/user.models";
-import { InternalServerError, NotFoundException, UnauthorizedException } from "../utils/appError";
+import { BadRequestException, InternalServerError, NotFoundException, UnauthorizedException } from "../utils/appError";
 import archiver from "archiver";
 import { Readable, PassThrough } from "stream";
 import path from "path";
@@ -12,7 +12,6 @@ import { DeleteObjectCommand, GetObjectCommand, PutObjectCommand } from "@aws-sd
 import { ENV_VARS } from "../config/env.config";
 import { s3Client } from "../config/aws-s3.config";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { file } from "zod";
 import { Upload } from "@aws-sdk/lib-storage";
 export const uploadFileService = async (
   userId: string,
@@ -22,7 +21,7 @@ export const uploadFileService = async (
   const user = await UserModel.findOne({ _id: userId });
   if (!user) throw new UnauthorizedException("Unauthorized access");
 
-  if (!files?.length) throw new UnauthorizedException("No files provided");
+  if (!files?.length) throw new BadRequestException("No files provided");
 
   const results = await Promise.allSettled(
     files.map(async (file) => {
@@ -142,7 +141,7 @@ export const getFileUrlService= async(fileId:string)=>{
 
 export const deleteFileService = async(userId:string, fileIds: string []) =>{
   const files = await FileModel.find({
-    _id:{$in:fileIds},
+    _id:{$in: fileIds},
   });
 
   if(!files.length)
