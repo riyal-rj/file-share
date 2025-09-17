@@ -190,7 +190,7 @@ export const downloadFilesService = async (
   if(files.length === 1){
     const signedUrl = await getFileFromS3({
       storageKey: files[0].storageKey,
-      mimeType: files[0].mimeTypes,
+      filename: files[0].originalName,
     });
 
     return {
