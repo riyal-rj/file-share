@@ -32,4 +32,4 @@ const upload = multer({
   },
 });
 
-export const multUpload = upload.array("files", MAX_FILES);
+export const multiUpload = upload.array("files", MAX_FILES);
